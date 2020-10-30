@@ -1,7 +1,7 @@
 # MFIRRN
 ## Results
-![Example 1](display/image02428_ll_3DDFA.jpg)
-![Example 2](display/image04292_ll_3DDFA.jpg)
+<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/image02428_ll_3DDFA.jpg" width="200" height="200" alt=""/>
+<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/image04292_ll_3DDFA.jpg" width="200" height="200" alt=""/>
 
 ## Installation
 First you have to make sure that you have all dependencies in place.
