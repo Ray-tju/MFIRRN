@@ -124,42 +124,38 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
     end = time.time()
     # loader is batch style
-    # for i, (input, target) in enumerate(train_loader):
     for i, (input, target) in enumerate(train_loader):
         target.requires_grad = False
         target = target.cuda(non_blocking=True)
 
         input1 = jigsaw_generator(input, 2)
-        # input2 = jigsaw_generator(input, 3)
-        # output, output_medium, output_fine, concat_out = model(input, input1, input2)
-        output, output_fine, concat_out = model(input, input )
-
-        # if args.loss.lower() == 'vdc':
-        #     loss1 = criterion(output_medium, target)
-        # elif args.loss.lower() == 'wpdc':
-        #     loss1 = criterion(output_medium, target)
-        #     # print(loss)
-        # elif args.loss.lower() == 'pdc':
-        #
-        #     loss1 = criterion(output_medium, target)
-        # else:
-        #     raise Exception(f'Unknown loss {args.loss}')
+        input2 = jigsaw_generator(input, 3)
+        output, output_medium, output_fine, concat_out = model(input, input1, input2)
 
         if args.loss.lower() == 'vdc':
-            loss2 = criterion(output_fine, target)
+            loss = criterion(output, target)
         elif args.loss.lower() == 'wpdc':
-            loss2 = criterion(output_fine, target)
+            loss = criterion(output, target)
         elif args.loss.lower() == 'pdc':
-            loss2 = criterion(output_fine, target)
+            loss = criterion(output, target)
         else:
             raise Exception(f'Unknown loss {args.loss}')
 
         if args.loss.lower() == 'vdc':
-            loss = criterion(output, target)
+             loss1 = criterion(output_medium, target)
         elif args.loss.lower() == 'wpdc':
-            loss = criterion(output, target)
+             loss1 = criterion(output_medium, target)
         elif args.loss.lower() == 'pdc':
-            loss = criterion(output, target)
+             loss1 = criterion(output_medium, target)
+        else:
+             raise Exception(f'Unknown loss {args.loss}')
+
+        if args.loss.lower() == 'vdc':
+            loss2 = criterion(output_fine, target)
+        elif args.loss.lower() == 'wpdc':
+            loss2 = criterion(output_fine, target)
+        elif args.loss.lower() == 'pdc':
+            loss2 = criterion(output_fine, target)
         else:
             raise Exception(f'Unknown loss {args.loss}')
 
@@ -173,18 +169,16 @@ def train(train_loader, model, criterion, optimizer, epoch):
             raise Exception(f'Unknown loss {args.loss}')
 
         optimizer.zero_grad()
-        # loss_all = loss + loss1 + loss2 + loss3
-        loss_all = loss + loss2 + loss3
+        loss_all = loss + loss1 + loss2 + loss3
         loss_all.backward()
         optimizer.step()
 
         data_time.update(time.time() - end)
 
         losses.update(loss.item(), input.size(0))
-        losses1.update(loss2.item(), input.size(0))
+        losses1.update(loss1.item(), input.size(0))
         losses2.update(loss2.item(), input.size(0))
         losses3.update(loss3.item(), input.size(0))
-        # compute gradient and do SGD step
 
         # measure elapsed time
         batch_time.update(time.time() - end)
@@ -194,9 +188,9 @@ def train(train_loader, model, criterion, optimizer, epoch):
             logging.info(f'Epoch: [{epoch}][{i}/{len(train_loader)}]\t'
                          f'LR: {lr:8f}\t'
                          f'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                         # f'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
+                         f'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
                          f'Loss_coarse {losses.val:.4f} ({losses.avg:.4f})\t'
-                         # f'Loss_medium {losses1.val:.4f} ({losses1.avg:.4f})\t'
+                         f'Loss_medium {losses1.val:.4f} ({losses1.avg:.4f})\t'
                          f'Loss_fine {losses2.val:.4f} ({losses2.avg:.4f})\t'
                          f'Loss_across_all {losses3.val:.4f} ({losses3.avg:.4f}\t)')
 
@@ -220,70 +214,11 @@ def jigsaw_generator(inputs, n):
 
     return jigsaws
 
-
+# No validation can reduce training time.
+# you can test saved model one by one. 
+# The best model is usually between 30 and 50 epochs.
 def validate(val_loader, model, criterion, epoch):
     model.eval()
-
-    end = time.time()
-    with torch.no_grad():
-        losses = []
-        losses1 = []
-        losses2 = []
-        losses3 = []
-        losses4 = []
-        for i, (input, target) in enumerate(val_loader):
-            # compute output
-            target.requires_grad = False
-            target = target.cuda(non_blocking=True)
-            output = model(input, 4)
-            input1 = jigsaw_generator(input, 4)
-            input2 = jigsaw_generator(input, 2)
-
-            output1 = model(input1, 1)
-            output2 = model(input2, 2)
-            output3 = model(torch.cat((output, output1, output2), dim=-1), 3)
-
-            attention_tem = torch.cat((output.unsqueeze(dim=-2), output1.unsqueeze(dim=-2)), dim=-2)
-            attention_tem_dog = torch.cat((attention_tem, output2.unsqueeze(dim=-2)), dim=-2)
-            attention_input = torch.cat((attention_tem_dog, output3.unsqueeze(dim=-2)), dim=-2)
-
-            output4 = model(attention_input, 5)
-            out_ori = output4[:, 0, :]
-            out_head1 = output4[:, 1, :]
-            out_head2 = output4[:, 2, :]
-            out_head3 = output4[:, 3, :]
-            tem = torch.add(out_ori, out_head1)
-            attention_out = torch.add(tem, out_head2)
-            attention_out = torch.add(attention_out, out_head3)
-            attention_out = attention_out.squeeze(1)
-
-            loss = criterion(output, target)
-            loss1 = criterion(output1, target)
-            loss2 = criterion(output2, target)
-            loss3 = criterion(output3, target)
-            loss4 = criterion(attention_out, target)
-
-            losses.append(loss.item())
-            losses1.append(loss1.item())
-            losses2.append(loss2.item())
-            losses3.append(loss3.item())
-            losses4.append(loss4.item())
-
-        elapse = time.time() - end
-        # loss = torch.mean(torch.stack(losses))   #*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*×*××*×
-        loss = np.mean(losses)
-        loss1 = np.mean(losses1)
-        loss2 = np.mean(losses2)
-        loss3 = np.mean(losses3)
-        loss4 = np.mean(losses4)
-        logging.info(f'Val: [{epoch}][{len(val_loader)}]\t'
-                     f'Loss {loss:.4f}\t'
-                     f'Loss_coarse {loss:.4f}\t'
-                     f'Loss_fine {loss1:.4f}\t'
-                     f'Loss_medium {loss2:.4f}\t'
-                     f'Loss_across_all {loss3:.4f}\t)'
-                     f'Loss_attention {loss4:.4f}\t)'
-                     f'Time {elapse:.3f}')
 
 
 def main():
