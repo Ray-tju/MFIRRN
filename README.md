@@ -5,7 +5,7 @@
 ## Installation
 First you have to make sure that you have all dependencies in place.
 
-You can create an anaconda environment called `dmifnet_space` using
+You can create an anaconda environment called `mfirrn` using
 ```
 conda env create -n mfirrn python=3.6 ## recommended python=3.6+
 conda activate mfirrn
