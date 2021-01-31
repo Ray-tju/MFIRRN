@@ -19,8 +19,11 @@ Nonlinear(CVPR2018)   | -, -, -, 4.700, - | -, -, -, -, -
 DAMDNet(ICCVW19)  | 2.907, 3.830, 4.953, 3.897, 0.837 | 4.359, 5.209, 6.028, 5.199, 0.682 
 MFIRRN  | 2.841, 3.572, 4.561, 3.658, 0.705 | 4.321, 5.051, 5.958, 5.110, 0.670 
 
-## Qualitative Results
-<img src="display/Qualitative.jpg" width="500" height="500">
+## Qualitative Results of Dense Aligment
+<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/Dense.jpg" width="500" height="500">
+
+## Qualitative Results of 3D Reconstruction 
+<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/3d.jpg" width="500" height="500">
 
 ## Installation
 First you have to make sure that you have all dependencies in place.
