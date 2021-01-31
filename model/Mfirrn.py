@@ -2,7 +2,6 @@ import torch.nn as nn
 import math
 import torch.utils.model_zoo as model_zoo
 import torch
-import attention
 
 __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
            'resnet152']
@@ -58,14 +57,10 @@ class LLNet(nn.Module):
             nn.Linear(186, 62),
         )
 
-        self.attention = attention_1d.SELayer(186, 3)
-
         self.encoder_coarse.fc = nn.Sequential()
-
         self.encoder_fine.fc = nn.Sequential()
         self.encoder_fine.layer4 = nn.Sequential()
         self.encoder_fine.avgpool = nn.Sequential()
-
         self.encoder_medium.fc = nn.Sequential()
         self.encoder_medium.avgpool = nn.Sequential()
 
@@ -81,11 +76,7 @@ class LLNet(nn.Module):
             BasicConv(256, 2048, kernel_size=1, stride=1, padding=0, relu=True),
             BasicConv(2048, 512, kernel_size=3, stride=1, padding=1, relu=True)
         )
-        # self.conv_block3 = nn.Sequential(
-        #     BasicConv(512, 2048, kernel_size=1, stride=1, padding=0, relu=True),
-        #     BasicConv(2048, 512, kernel_size=1, stride=1, padding=0, relu=True)
-        # )
-
+   
         self.fc_fine = nn.Sequential(nn.Linear(512, 256),
                                      nn.Dropout(p=0.3),
                                      nn.ELU(inplace=True),
@@ -118,11 +109,9 @@ class LLNet(nn.Module):
         output_medium = self.fc_medium(output_medium)
 
         output, _, _ = self.encoder_coarse(x, output_fine_x1, output_medium_x2)
-        # output = self.conv_block3(output.view(output.size(0), -1, 1, 1))
         output = self.fc_coarse(output.view(output.size(0), -1))
 
         concat_input = torch.cat((output, output_medium, output_fine), dim=-1)
-        # concat_out = self.attention(concat_input.unsqueeze(-1))
         concat_out = self.concat_decoder(concat_input.squeeze(-1))
 
         return output, output_medium, output_fine, concat_out
