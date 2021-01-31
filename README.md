@@ -5,6 +5,13 @@
 ## 3D Face Reconstruction Result
 <img src="https://github.com/leilimaster/MFIRRN/blob/main/display/image02428_ll_3DDFA.jpg" width="200" height="200" alt=""/><span>->->-></span><img src="https://github.com/leilimaster/MFIRRN/blob/main/display/man_mesh_notexture.jpg" width="150" height="200" alt=""/><span>->->-></span><img src="https://github.com/leilimaster/MFIRRN/blob/main/display/man_mesh.jpg" width="150" height="200" alt=""/>
 
+
+## Citing this work
+If you find our code or paper useful, please consider citing
+```
+wait.....
+```
+
 ## Installation
 First you have to make sure that you have all dependencies in place.
 
