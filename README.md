@@ -6,7 +6,7 @@
 <img src="https://github.com/leilimaster/MFIRRN/blob/main/display/image02428_ll_3DDFA.jpg" width="200" height="200" alt=""/><span>->->-></span><img src="https://github.com/leilimaster/MFIRRN/blob/main/display/man_mesh_notexture.jpg" width="150" height="200" alt=""/><span>->->-></span><img src="https://github.com/leilimaster/MFIRRN/blob/main/display/man_mesh.jpg" width="150" height="200" alt=""/>
 
 ## Quantitative Results
-       | AFLW2000-3D Dataset (68 pts)  | AFLW Dataset (21 pts)
+ NME2D   | AFLW2000-3D Dataset (68 pts)  | AFLW Dataset (21 pts)
 :-: | :-: | :-: 
 Method |[0,30],[30,60],[60,90], Mean, Std  | [0,30],[30,60],[60,90], Mean, Std
 CDM | -, -, -, -, - | 8.150, 13.020, 16.170, 12.440, 4.040 
