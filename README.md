@@ -6,9 +6,9 @@
 <img src="https://github.com/leilimaster/MFIRRN/blob/main/display/image02428_ll_3DDFA.jpg" width="200" height="200" alt=""/><span>->->-></span><img src="https://github.com/leilimaster/MFIRRN/blob/main/display/man_mesh_notexture.jpg" width="150" height="200" alt=""/><span>->->-></span><img src="https://github.com/leilimaster/MFIRRN/blob/main/display/man_mesh.jpg" width="150" height="200" alt=""/>
 
 ## Quantitative Results
-++     | AFLW2000-3D Dataset (68 pts)  | AFLW Dataset (21 pts)
-Method |[0,30],[30,60],[60,90], Mean, Std  | [0,30],[30,60],[60,90], Mean, Std
+       | AFLW2000-3D Dataset (68 pts)  | AFLW Dataset (21 pts)
 :-: | :-: | :-: 
+Method |[0,30],[30,60],[60,90], Mean, Std  | [0,30],[30,60],[60,90], Mean, Std
 CDM | -, -, -, -, - | 8.150, 13.020, 16.170, 12.440, 4.040 
 RCPR | 4.260, 5.960, 13.180, 7.800, 4.740 | 5.430, 6.580, 11.530, 7.850, 3.240
 ESR | 4.600, 6.700, 12.670, 7.990, 4.190 | 5.660, 7.120, 11.940, 8.240, 3.290
