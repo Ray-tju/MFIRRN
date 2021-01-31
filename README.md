@@ -67,10 +67,10 @@ DAMDNet(ICCVW19)  | 2.907, 3.830, 4.953, 3.897, 0.837 | 4.359, 5.209, 6.028, 5.1
 MFIRRN  | 2.841, 3.572, 4.561, 3.658, 0.705 | 4.321, 5.051, 5.958, 5.110, 0.670 
 
 ## Qualitative Results of Dense Aligment
-<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/Dense.jpg" width="700" height="600">
+<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/Dense.jpg" width="700" height="500">
 
 ## Qualitative Results of 3D Reconstruction 
-<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/3d.jpg" width="700" height="500">
+<img src="https://github.com/leilimaster/MFIRRN/blob/main/display/3d.jpg" width="700" height="400">
 
 # Futher Information
 If you have any problems with the code, please list the problems you encountered in the issue area, and I will reply you soon.
