@@ -15,12 +15,16 @@ sudo pip3 install dlib
 sudo pip3 install opencv-python
 sudo pip3 install cython
 ```
+Then, download the baseline code.
+* download the [3DDFA](https://github.com/cleardusk/3DDFA)
 
-Then, compile the extension modules.
+Next, compile the extension modules.
 ```
 cd utils/cython
 python3 setup.py build_ext -i
 ```
+Final, adopt our model in baseline code.
+
 
 ## Generation
 To generate results using a trained model, use
