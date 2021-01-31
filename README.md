@@ -27,7 +27,10 @@ cd utils/cython
 python3 setup.py build_ext -i
 ```
 Final, adopt our model in baseline code.
-
+```
+Copy our model to baseline
+Replace train.py with our train.py
+```
 
 ## Generation
 To generate results using a trained model, use
