@@ -35,8 +35,8 @@ python3 setup.py build_ext -i
 ```
 Final, adopt our model in baseline code.
 ```
-Copy our model to baseline
-Replace train.py with our train.py
+Copy our model 'model/Mfirrn' to  baseline
+Replace train.py in the baseline with our train.py
 ```
 
 ## Generation
