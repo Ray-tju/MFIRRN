@@ -9,7 +9,14 @@
 ## Citing this work
 If you find our code or paper useful, please consider citing
 ```
-wait.....
+@inproceedings{li2021multi,
+  title={Multi-Granularity Feature Interaction and Relation Reasoning for 3D Dense Alignment and Face Reconstruction},
+  author={Li, Lei and Li, Xiangzheng and Wu, Kangbo and Lin, Kui and Wu, Suping},
+  booktitle={ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages={4265--4269},
+  year={2021},
+  organization={IEEE}
+}
 ```
 
 ## Installation
