@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import torch.backends.cudnn as cudnn
-import models.resnet_best_42 as mfirrn
+import models.Mfirrn as mfirrn
 import time
 import numpy as np
 
@@ -162,7 +162,7 @@ def benchmark_pipeline(arch, checkpoint_fp):
 def main():
     parser = argparse.ArgumentParser(description='3DDFA Benchmark')
     parser.add_argument('--arch', default='resnet34', type=str)
-    parser.add_argument('-c', '--checkpoint-fp', default="/media/pc/lilei/3DDFA-master/models/phase1_wpdc_checkpoint_epoch_42.pth.tar", type=str)
+    parser.add_argument('-c', '--checkpoint-fp', default="./models/phase1_wpdc_checkpoint_epoch_42.pth.tar", type=str)
     args = parser.parse_args()
 
     benchmark_pipeline(args.arch, args.checkpoint_fp)
