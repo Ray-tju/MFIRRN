@@ -43,8 +43,8 @@ python3 setup.py build_ext -i
 Final, adopt our model in baseline code.
 ```
 Copy our model 'model/Mfirrn' to  baseline
-Replace train.py in the baseline with our train.py
-Replace benchmark.py in the baseline with benchmark.py
+Replace "train.py" in the baseline with our "train.py"
+Replace "benchmark.py" in the baseline with our "benchmark.py"
 ```
 
 ## Generation
