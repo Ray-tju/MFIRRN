@@ -44,6 +44,7 @@ Final, adopt our model in baseline code.
 ```
 Copy our model 'model/Mfirrn' to  baseline
 Replace train.py in the baseline with our train.py
+Replace benchmark.py in the baseline with benchmark.py
 ```
 
 ## Generation
@@ -52,6 +53,12 @@ To generate results using a trained model, use
 python3 main.py -f samples/test.jpg 
 ```
 Note that we suggest you choose normal image due to dlib restrictions on face capture
+
+## Evaluation
+To eval our MFIRRN , use
+```
+python benchmark.py
+```
 
 ## Training
 To train our MFIRRN with wpdc Loss, use
