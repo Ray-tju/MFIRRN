@@ -65,7 +65,7 @@ To eval our MFIRRN , use
 python benchmark.py
 ```
 <img src="https://github.com/leilimaster/MFIRRN/blob/main/display/result.png" width="700" height="400" alt=""/><span>
-  </n>
+<br>
 Note that our GPU is Nvidia RTX 3090, and the test environment is cuda V11.1, Pytorch 1.7.
 
 ## Training
