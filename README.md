@@ -54,6 +54,11 @@ python3 main.py -f samples/test.jpg
 ```
 Note that we suggest you choose normal image due to dlib restrictions on face capture
 
+* download our pre-trained model [Mfirrn](https://drive.google.com/file/d/1NlI9KH3tcZVA2gsLwbmQTSMUSAQzsFY-/view?usp=sharing
+) via Google
+
+Due to the randomness of multi-granularity segmentation, the evaluation result will fluctuate in the range of 3.640 to 3.690.
+
 ## Evaluation
 To eval our MFIRRN , use
 ```
